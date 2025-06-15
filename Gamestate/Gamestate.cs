@@ -1,4 +1,5 @@
 using LibHammer.Deployments;
+using LibHammer.Gamestate.Serviceproviders;
 using LibHammer.MissionRules;
 using LibHammer.Primaries;
 using LibHammer.Secondaries;
@@ -8,16 +9,22 @@ namespace LibHammer.Gamestate;
 
 public class Gamestate
 {
+    // State managers
+    public PhaseManager PhaseMan;
+
+
+    // Stuff for external resolvers
+    public IDistanceProvider DistanceProvider;
+    public IEngagementProvider EngagementProvider;
+    public IViewClearanceProvider ViewClearanceProvider;
+
+
     // Stuff for player 1
-    string? Player1_Name;
-    List<BoardTroop> Player1_Army = new();
-    public readonly SecondaryMission[] Player1_Secondaries = new SecondaryMission[2];
+    public Player Player1 = new();
 
 
     // Stuff for player 2
-    string? Player2_Name;
-    List<BoardTroop> Player2_Army = new();
-    public readonly SecondaryMission[] Player2_Secondaries = new SecondaryMission[2];
+    public Player Player2 = new();
 
     PrimaryMission Primary;
     MissionRule Rule;
@@ -27,23 +34,23 @@ public class Gamestate
     {
         get
         {
-            return Player1_Name != null && Player2_Name != null;
+            return Player1.Name != null && Player2.Name != null;
         }
     }
 
 
     public void InsertArmy(List<Troop> army, string player)
     {
-        if (Player1_Name == null)
+        if (Player1.Name == null)
         {
-            Player1_Name = player;
-            Player1_Army = Army2Board(army);
+            Player1.Name = player;
+            Player1.Army = Army2Board(army);
         }
 
-        else if (Player2_Name == null)
+        else if (Player2.Name == null)
         {
-            Player2_Name = player;
-            Player2_Army = Army2Board(army);
+            Player2.Name = player;
+            Player2.Army = Army2Board(army);
         }
 
         else throw new Exception("Both players already added!");
@@ -64,6 +71,9 @@ public class Gamestate
     public void SetupMission()
     {
         if (!PlayersReady) throw new Exception("Players are not yet initialized!");
+
+        PhaseMan = new(Player1: Player1, Player2: Player2, state: this);
+
         Primary = PrimaryManager.RollPrimary();
         Rule = RuleManager.RollMission();
         Deploy = DeploymentManager.RollDeployment();
@@ -78,13 +88,13 @@ public class Gamestate
             Random rng = new();
             if (rng.Next(0, 2) == 0)
             {
-                ChoosingPlayer = Player1_Name;
-                OtherPlayer = Player2_Name;
+                ChoosingPlayer = Player1.Name;
+                OtherPlayer = Player2.Name;
             }
             else
             {
-                ChoosingPlayer = Player2_Name;
-                OtherPlayer = Player1_Name;
+                ChoosingPlayer = Player2.Name;
+                OtherPlayer = Player1.Name;
             }
         }
         return ChoosingPlayer;

@@ -14,7 +14,7 @@ public  class InterphaseManager
     List<InterphaseAction> postfight = new();
 
     public void AddAction(Interphase where, InterphaseAction action) => Interphase2List(where).Add(action);
-
+    public void AddAction(InterphaseAction action) => Interphase2List(action.Where).Add(action);
 
     public void ExecuteActions(Interphase where, Gamestate state, Phase phase)
     {

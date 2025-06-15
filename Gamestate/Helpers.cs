@@ -27,7 +27,7 @@ static class Helpers
     }
 
     // D6 roll provider, can be tapped into
-    static int rollD6(int n=1)
+    public static int rollD6(int n=1)
     {
         Random rng = new();
         int sum = 0;
@@ -36,7 +36,7 @@ static class Helpers
     }
 
     // Dy roll provider, can be tapped into
-    static int rollxDy(int x, int y)
+    public static int rollxDy(int x, int y)
     {
         Random rng = new();
         int sum = 0;
@@ -44,7 +44,7 @@ static class Helpers
         return sum;
     }
 
-    static int StrengthVsToughness(int strength, int toughness)
+    public static int StrengthVsToughness(int strength, int toughness)
     {
         if (strength <= toughness / 2) return 6;
         if (strength < toughness) return 5;
