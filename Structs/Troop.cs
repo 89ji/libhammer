@@ -1,6 +1,6 @@
 namespace LibHammer.Structs;
 
-struct Troop
+public struct Troop
 {
     public string Name{ get; set; }
     public int Movement{ get; set; }

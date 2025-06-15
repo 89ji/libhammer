@@ -2,7 +2,7 @@ using LibHammer.Gamestate;
 
 namespace LibHammer.Structs;
 
-struct Weapon
+public struct Weapon
 {
     public string Name { get; set; }
     public int Range { get; set; }
