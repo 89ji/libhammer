@@ -1,19 +1,23 @@
 using LibHammer.Deployments;
 using LibHammer.MissionRules;
 using LibHammer.Primaries;
+using LibHammer.Secondaries;
 using LibHammer.Structs;
 
-namespace LibHammer.Gameboard;
+namespace LibHammer.Gamestate;
 
-class Gameboard
+public class Gamestate
 {
     // Stuff for player 1
     string? Player1_Name;
     List<BoardTroop> Player1_Army = new();
+    public readonly SecondaryMission[] Player1_Secondaries = new SecondaryMission[2];
+
 
     // Stuff for player 2
     string? Player2_Name;
     List<BoardTroop> Player2_Army = new();
+    public readonly SecondaryMission[] Player2_Secondaries = new SecondaryMission[2];
 
     PrimaryMission Primary;
     MissionRule Rule;
@@ -102,10 +106,4 @@ class Gameboard
             Attacker = OtherPlayer;
         }
     }
-
-    public void SetupSecondaries()
-    {
-        throw new NotImplementedException();
-    }
-
 }

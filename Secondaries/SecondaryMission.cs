@@ -1,6 +1,9 @@
 namespace LibHammer.Secondaries;
 
-abstract class SecondaryMission
+public abstract class SecondaryMission
 {
-    
+    public SecondaryType MissionType;
+    public string Name;
+    public string Flavor;
+    public string Description;
 }
