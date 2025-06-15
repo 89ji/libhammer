@@ -1,6 +1,6 @@
 namespace LibHammer.ControlPoint;
 
-interface IControlPointResolver
+public interface IControlPointResolver
 {
     public ObjectiveInfluence ResolveInfluences();
 }

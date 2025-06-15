@@ -12,6 +12,7 @@ public  class InterphaseManager
     List<InterphaseAction> postcharge = new();
     List<InterphaseAction> prefight = new();
     List<InterphaseAction> postfight = new();
+    List<InterphaseAction> postgame = new();
 
     public void AddAction(Interphase where, InterphaseAction action) => Interphase2List(where).Add(action);
     public void AddAction(InterphaseAction action) => Interphase2List(action.Where).Add(action);
@@ -36,6 +37,7 @@ public  class InterphaseManager
             Interphase.PostCharge => postcharge,
             Interphase.PreFight => prefight,
             Interphase.PostFight => postfight,
+            Interphase.Postgame => postgame,
             _ => null,
         };
     }

@@ -1,6 +1,6 @@
 namespace LibHammer.ControlPoint;
 
-class ControlPoint
+public class Controlpoint
 {
     public static IControlPointResolver? Resolver;
 

@@ -4,6 +4,7 @@ using LibHammer.MissionRules;
 using LibHammer.Primaries;
 using LibHammer.Secondaries;
 using LibHammer.Structs;
+using LibHammer.ControlPoint;
 
 namespace LibHammer.Gamestate;
 
@@ -11,8 +12,8 @@ public class Gamestate
 {
     // State managers
     public PhaseManager PhaseMan;
-
-
+    public readonly Controlpoint[] Objective = new Controlpoint[5];
+    
     // Stuff for external resolvers
     public IDistanceProvider DistanceProvider;
     public IEngagementProvider EngagementProvider;
@@ -72,7 +73,7 @@ public class Gamestate
     {
         if (!PlayersReady) throw new Exception("Players are not yet initialized!");
 
-        PhaseMan = new(Player1: Player1, Player2: Player2, state: this);
+        PhaseMan = new(Player1, Player2, this);
 
         Primary = PrimaryManager.RollPrimary();
         Rule = RuleManager.RollMission();

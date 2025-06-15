@@ -169,21 +169,40 @@ public class PhaseManager
             case Phase.Fight:
                 FireInterphase(Interphase.PostFight);
 
-                // Swap the active player and increment the turn counter if p1 is back
-                if (ActivePlayer == Player1)
+                // Check if game is over
+                if (Turn == 5)
                 {
-                    ActivePlayer = Player2;
-                }
-                else
-                {
+                    CurrentPhase = Phase.Postgame;
+
                     ActivePlayer = Player1;
-                    Turn++;
+                    FireInterphase(Interphase.Postgame);
+
+                    ActivePlayer = Player2;
+                    FireInterphase(Interphase.Postgame);
+                    break;
                 }
 
-                // Move to the command phase and fire the new active players precommand actions
-                CurrentPhase = Phase.Command;
-                FireInterphase(Interphase.PreCommand);
-                break;
+                // Otherwise pass the turn
+                else
+                {
+                    // Swap the active player and increment the turn counter if p1 is back
+                    if (ActivePlayer == Player1)
+                    {
+                        ActivePlayer = Player2;
+                    }
+                    else
+                    {
+                        ActivePlayer = Player1;
+                        Turn++;
+                    }
+
+                    // Move to the command phase and fire the new active players precommand actions
+                    CurrentPhase = Phase.Command;
+                    FireInterphase(Interphase.PreCommand);
+                    break;
+                }
+
+
 
 
         }

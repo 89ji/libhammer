@@ -7,5 +7,6 @@ public enum Phase
     Move,
     Shoot,
     Charge,
-    Fight
+    Fight,
+    Postgame
 }

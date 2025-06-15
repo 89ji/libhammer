@@ -11,5 +11,6 @@ public enum Interphase
     PreCharge,
     PostCharge,
     PreFight,
-    PostFight
+    PostFight,
+    Postgame
 }

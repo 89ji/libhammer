@@ -1,6 +1,6 @@
 namespace LibHammer.ControlPoint;
 
-struct ObjectiveInfluence
+public struct ObjectiveInfluence
 {
     string Player1_Name;
     int Player1_Influence;
