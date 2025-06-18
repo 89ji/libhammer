@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
+
 namespace LibHammer.Gamestate.InterphaseActions;
 
-public  class InterphaseManager
+public class InterphaseManager
 {
     List<InterphaseAction> precommand = new();
     List<InterphaseAction> postcommand = new();

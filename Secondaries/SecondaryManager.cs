@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LibHammer.Secondaries.Fixed;
 using LibHammer.Secondaries.Tactical;
 

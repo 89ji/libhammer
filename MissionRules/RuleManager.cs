@@ -1,3 +1,5 @@
+using System;
+
 namespace LibHammer.MissionRules;
 
 static class RuleManager

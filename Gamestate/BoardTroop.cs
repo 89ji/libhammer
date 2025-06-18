@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LibHammer.Structs;
 
 namespace LibHammer.Gamestate;
@@ -5,6 +6,7 @@ namespace LibHammer.Gamestate;
 // Represents a troop on the board with its current move, damage taken, etc
 public class BoardTroop
 {
+    public Player Owner;
     public Troop Stats;
     public int DamageTaken;
     public bool BattleShocked;

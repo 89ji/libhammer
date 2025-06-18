@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace LibHammer.Structs;
 
 public struct Troop

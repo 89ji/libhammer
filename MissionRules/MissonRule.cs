@@ -1,6 +1,6 @@
 namespace LibHammer.MissionRules;
 
-abstract class MissionRule
+public abstract class MissionRule
 {
     public string Name;
     public string Flavor;

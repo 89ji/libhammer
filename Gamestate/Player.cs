@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LibHammer.Gamestate.InterphaseActions;
 using LibHammer.Secondaries;
 
@@ -7,6 +8,7 @@ public class Player
 {
     public string? Name;
     public List<BoardTroop> Army = new();
+    public bool isDefender;
     public int CP = 0;
     public int VP = 0;
     public readonly SecondaryMission[] Secondaries = new SecondaryMission[2];

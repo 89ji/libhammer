@@ -1,8 +1,10 @@
+using System;
+
 namespace LibHammer.ControlPoint;
 
 public class Controlpoint
 {
-    public static IControlPointResolver? Resolver;
+    public IControlPointResolver? Resolver;
 
     public ObjectiveInfluence GetInfluence()
     {

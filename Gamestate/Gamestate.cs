@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using LibHammer.Deployments;
 using LibHammer.Gamestate.Serviceproviders;
 using LibHammer.MissionRules;
@@ -27,9 +29,9 @@ public class Gamestate
     // Stuff for player 2
     public Player Player2 = new();
 
-    PrimaryMission Primary;
-    MissionRule Rule;
-    Deployment Deploy;
+    public PrimaryMission Primary;
+    public MissionRule Rule;
+    public Deployment Deploy;
 
     public bool PlayersReady
     {
@@ -45,24 +47,25 @@ public class Gamestate
         if (Player1.Name == null)
         {
             Player1.Name = player;
-            Player1.Army = Army2Board(army);
+            Player1.Army = Army2Board(army, Player1);
         }
 
         else if (Player2.Name == null)
         {
             Player2.Name = player;
-            Player2.Army = Army2Board(army);
+            Player2.Army = Army2Board(army, Player2);
         }
 
         else throw new Exception("Both players already added!");
     }
 
-    List<BoardTroop> Army2Board(List<Troop> army)
+    List<BoardTroop> Army2Board(List<Troop> army, Player player)
     {
         List<BoardTroop> boardArmy = new();
         foreach (Troop troop in army)
         {
             var btroop = new BoardTroop(troop);
+            btroop.Owner = player;
             boardArmy.Add(btroop);
         }
         return boardArmy;
@@ -80,41 +83,39 @@ public class Gamestate
         Deploy = DeploymentManager.RollDeployment();
     }
 
-    string? ChoosingPlayer;
-    string? OtherPlayer;
-    public string GetChoosingPlayer()
+    Player? ChoosingPlayer;
+    Player? OtherPlayer;
+    public Player GetChoosingPlayer()
     {
         if (ChoosingPlayer == null)
         {
             Random rng = new();
             if (rng.Next(0, 2) == 0)
             {
-                ChoosingPlayer = Player1.Name;
-                OtherPlayer = Player2.Name;
+                ChoosingPlayer = Player1;
+                OtherPlayer = Player2;
             }
             else
             {
-                ChoosingPlayer = Player2.Name;
-                OtherPlayer = Player1.Name;
+                ChoosingPlayer = Player2;
+                OtherPlayer = Player1;
             }
         }
         return ChoosingPlayer;
     }
 
-    public string Attacker;
-    public string Defender;
 
     public void ChooseRole(bool isAttacking)
     {
         if (isAttacking)
         {
-            Attacker = ChoosingPlayer;
-            Defender = OtherPlayer;
+            ChoosingPlayer.isDefender = false; ;
+            OtherPlayer.isDefender = true;
         }
         else
         {
-            Defender = ChoosingPlayer;
-            Attacker = OtherPlayer;
+            ChoosingPlayer.isDefender = true; ;
+            OtherPlayer.isDefender = false;
         }
     }
 }

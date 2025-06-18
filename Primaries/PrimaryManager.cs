@@ -1,3 +1,5 @@
+using System;
+
 namespace LibHammer.Primaries;
 
 static class PrimaryManager
